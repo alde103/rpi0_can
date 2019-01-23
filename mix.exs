@@ -1,7 +1,7 @@
-defmodule NervesSystemRpi0.MixProject do
+defmodule Rpi0Can.MixProject do
   use Mix.Project
 
-  @app :nerves_system_rpi0
+  @app :rpi0_can
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
            |> String.trim()
@@ -26,7 +26,7 @@ defmodule NervesSystemRpi0.MixProject do
   end
 
   defp bootstrap(args) do
-    System.put_env("MIX_TARGET", "rpi0")
+    System.put_env("MIX_TARGET", "rpi0_can")
     Application.start(:nerves_bootstrap)
     Mix.Task.run("loadconfig", args)
   end
@@ -34,9 +34,9 @@ defmodule NervesSystemRpi0.MixProject do
   defp nerves_package do
     [
       type: :system,
-      artifact_sites: [
-        {:github_releases, "nerves-project/#{@app}"}
-      ],
+      # artifact_sites: [
+      #   {:github_releases, "nerves-project/#{@app}"}
+      # ],
       build_runner_opts: build_runner_opts(),
       platform: Nerves.System.BR,
       platform_config: [
@@ -58,16 +58,16 @@ defmodule NervesSystemRpi0.MixProject do
 
   defp description do
     """
-    Nerves System - Raspberry Pi Zero and Zero W
+    Nerves System - Raspberry Pi Zero and Zero W with CAN interface (MCP2515)
     """
   end
 
   defp package do
     [
-      maintainers: ["Frank Hunleth", "Justin Schneck"],
+      maintainers: ["Aldebaran Alonso", "valiot"],
       files: package_files(),
       licenses: ["Apache 2.0"],
-      links: %{"Github" => "https://github.com/nerves-project/#{@app}"}
+      links: %{"Github" => "https://github.com/alde103/#{@app}"}
     ]
   end
 
